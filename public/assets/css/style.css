@@ -1,0 +1,51 @@
+#logo img {
+  width: 34em;
+  margin-left: 6em;
+}
+
+.referendum-container{
+  background: #00b0b3;
+  color: #fff;
+  width: 80%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.2em 1em 0.2em 1em;
+  text-align: left;
+  border-radius: 0.35em;
+  margin-top: 3em;
+}
+
+#intro a{
+  transition: all .2s ease-in-out;
+}
+
+#intro a:hover {
+  transform: scale(1.02);
+}
+
+.referendum-container h2{
+  font-size: 2em;
+  margin: 0.6em 0 0.6em 0;
+}
+
+.referendum-container p{
+  font-size: 1.1em;
+  margin: 0;
+}
+
+.ref-container-summary{
+  width: 70%;
+  padding: 0em 2em 1em 0em;
+  display: table-cell;
+}
+
+.ref-container-vote{
+  width: 30%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.clear-float{
+  clear: both;
+}

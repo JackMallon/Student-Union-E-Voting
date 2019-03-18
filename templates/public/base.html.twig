@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
         <title>{% block title %}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
@@ -25,6 +26,7 @@
                         <li><a href="{{ url('about') }}">About</a></li>
                         <li><a href="{{ url('upcoming') }}">Upcoming</a></li>
                         <li><a href="{{ url('contact') }}">Contact</a></li>
+                        <li><a href="{{ url('contact') }}">Log In</a></li>
                         <li><a href="{{ url('admin') }}">Admin</a></li>
                     </ul>
                 </nav>

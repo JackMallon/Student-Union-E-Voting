@@ -2176,12 +2176,10 @@ input, select, textarea {
 
 /* Intro */
 
-	.center {
-		text-align: center;
-	}
 
 	#intro {
 		padding-bottom: 8em;
+		text-align: center;
 	}
 
 		#intro p.style1 {

@@ -1,5 +1,5 @@
 #logo img {
-  width: 34em;
+  width: 30em;
   margin-left: 6em;
 }
 
@@ -48,4 +48,8 @@
 
 .clear-float{
   clear: both;
+}
+
+.left{
+  text-align: left;
 }

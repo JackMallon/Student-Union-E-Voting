@@ -1,20 +1,103 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello StudentController!{% endblock %}
+{% extends 'admin/base.html.twig' %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="inner-wrapper">
+        <!-- start: sidebar -->
+        <aside id="sidebar-left" class="sidebar-left">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <div class="sidebar-header">
+                <div class="sidebar-title">
+                    Navigation
+                </div>
+                <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                </div>
+            </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/jack/Student-Union-E-Voting/src/Controller/StudentController.php'|file_link(0) }}">src/Controller/StudentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/jack/Student-Union-E-Voting/templates/student/index.html.twig'|file_link(0) }}">templates/student/index.html.twig</a></code></li>
-    </ul>
-</div>
+            <div class="nano">
+                <div class="nano-content">
+                    <nav id="menu" class="nav-main" role="navigation">
+                        <hr class="separator" />
+                        <ul class="nav nav-main">
+                            <li class="nav-active">
+                                <a href="{{ url('admin') }}">
+                                    <span>Upcoming Referendums</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-main">
+                            <li>
+                                <a href="#">
+                                    <span>Propose Referendum</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </aside>
+        <!-- end: sidebar -->
+
+        <section role="main" class="content-body">
+            <header class="page-header">
+                <h2>Hey there</h2>
+            </header>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="fa fa-caret-down"></a>
+                            </div>
+
+                            <h2 class="panel-title">Proposed Referendums</h2>
+                            <p class="panel-subtitle">This is a list of the referendums proposed by the students of the college.</p>
+                        </header>
+                        <div class="panel-body">
+                            <h4>Proposed by: B00096918</h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <p><strong>Number of people in favour: 19</strong></p>
+                            <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Create referendum</button>
+
+                            <hr>
+
+                            <h4>Proposed by: B00096918</h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <p><strong>Number of people in favour: 19</strong></p>
+                            <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Create referendum</button>
+
+                            <hr>
+
+                            <h4>Proposed by: B00096918</h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <p><strong>Number of people in favour: 19</strong></p>
+                            <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Create referendum</button>
+
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- end: page -->
+        </section>
+    </div>
+    </section>
 {% endblock %}

@@ -93,9 +93,9 @@ class User implements UserInterface
     public function getRoles()
     {
         $userRole = $this->role;
-        return [
-            $userRole
-        ];
+        $roles = array( $userRole );
+        if($userRole == "ROLE_ADMIN"){ array_push($roles,'ROLE_STUDENT'); }
+        return $roles;
     }
 
     public function getSalt() {}

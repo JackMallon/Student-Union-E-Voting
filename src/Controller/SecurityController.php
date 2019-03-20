@@ -27,14 +27,15 @@ class SecurityController extends AbstractController
      */
     public function dashboard()
     {
-        $role = $this->getUser()->getRole();
+        $roles = $this->getUser()->getRole();
+        print $roles;
 
-        if ($role == "ROLE_USER") {
-            return $this->render('public/about.html.twig');
-        } elseif ($role == "ROLE_ADMIN") {
-            return $this->render('public/contact.html.twig');
+        if ($roles == "ROLE_ADMIN") {
+            return $this->redirectToRoute('admin');
+        } elseif ($roles == "ROLE_STUDENT") {
+            return $this->redirectToRoute('student');
         } else {
-            return $this->render('public/index.html.twig');
+            return $this->redirectToRoute('home');
         }
     }
 }

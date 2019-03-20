@@ -21,4 +21,20 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
+    /**
+     * @Route("/dashboard", name="dashboard")
+     */
+    public function dashboard()
+    {
+        $role = $this->getUser()->getRole();
+
+        if ($role == "ROLE_USER") {
+            return $this->render('public/about.html.twig');
+        } elseif ($role == "ROLE_ADMIN") {
+            return $this->render('public/contact.html.twig');
+        } else {
+            return $this->render('public/index.html.twig');
+        }
+    }
 }

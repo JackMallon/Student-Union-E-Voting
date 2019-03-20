@@ -1,6 +1,167 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
+
 {% block body %}
-    <h1>Admin home</h1>
-    here is the secret code to the safe:
-    007123
+    <section class="body">
+
+        <!-- start: header -->
+        <header class="header">
+            <div class="logo-container">
+                <a href="../" class="logo">
+                    <img src="../dashboard/images/logo.png" height="35" alt="JSOFT Admin" />
+                </a>
+                <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                </div>
+            </div>
+
+            <!-- start: search & user box -->
+            <div class="header-right">
+
+                <span class="separator"></span>
+
+                <div id="userbox" class="userbox">
+                    <a href="#" data-toggle="dropdown">
+                        <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@JSOFT.com">
+                            <span class="name">B00096918</span>
+                            <span class="role">administrator</span>
+                        </div>
+
+                        <i class="fa custom-caret"></i>
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <ul class="list-unstyled">
+                            <li class="divider"></li>
+                            <li>
+                                <a role="menuitem" tabindex="-1" href="pages-signin.html"><i class="fa fa-power-off"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- end: search & user box -->
+        </header>
+        <!-- end: header -->
+
+        <div class="inner-wrapper">
+            <!-- start: sidebar -->
+            <aside id="sidebar-left" class="sidebar-left">
+
+                <div class="sidebar-header">
+                    <div class="sidebar-title">
+                        Navigation
+                    </div>
+                    <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+                        <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                    </div>
+                </div>
+
+                <div class="nano">
+                    <div class="nano-content">
+                        <nav id="menu" class="nav-main" role="navigation">
+                            <hr class="separator" />
+                            <ul class="nav nav-main">
+                                <li class="nav-active">
+                                    <a href="index.html">
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-main">
+                                <li>
+                                    <a href="index.html">
+                                        <span>Upcoming</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-main">
+                                <li>
+                                    <a href="index.html">
+                                        <span>Create Referendum</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-main">
+                                <li>
+                                    <a href="index.html">
+                                        <span>Past Referendums</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-main">
+                                <li>
+                                    <a href="index.html">
+                                        <span>Administrators</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+
+            </aside>
+            <!-- end: sidebar -->
+
+            <section role="main" class="content-body">
+                <header class="page-header">
+                    <h2>Dashboard</h2>
+                </header>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-down"></a>
+                                </div>
+
+                                <h2 class="panel-title">Proposed Referendums</h2>
+                                <p class="panel-subtitle">This is a list of the referendums proposed by the students of the college.</p>
+                            </header>
+                            <div class="panel-body">
+                                <h4>Proposed by: B00096918</h4>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                    sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </p>
+                                <p><strong>Number of people in favour: 19</strong></p>
+                                <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Create referendum</button>
+
+                                <hr>
+
+                                <h4>Proposed by: B00096918</h4>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                    sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </p>
+                                <p><strong>Number of people in favour: 19</strong></p>
+                                <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Create referendum</button>
+
+                                <hr>
+
+                                <h4>Proposed by: B00096918</h4>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                    sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </p>
+                                <p><strong>Number of people in favour: 19</strong></p>
+                                <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Create referendum</button>
+
+
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- end: page -->
+            </section>
+        </div>
+    </section>
 {% endblock %}

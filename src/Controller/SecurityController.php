@@ -28,7 +28,22 @@ class SecurityController extends AbstractController
     public function dashboard()
     {
         $roles = $this->getUser()->getRole();
-        print $roles;
+
+        if ($roles == "ROLE_ADMIN") {
+            return $this->redirectToRoute('admin');
+        } elseif ($roles == "ROLE_STUDENT") {
+            return $this->redirectToRoute('student');
+        } else {
+            return $this->redirectToRoute('home');
+        }
+    }
+
+    /**
+     * @Route("/role_route", name="role_route")
+     */
+    public function role_route()
+    {
+        $roles = $this->getUser()->getRole();
 
         if ($roles == "ROLE_ADMIN") {
             return $this->redirectToRoute('admin');

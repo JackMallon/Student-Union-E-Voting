@@ -13,7 +13,14 @@ class AdminController extends AbstractController
      */
     public function index()
     {
-        return $this->render('admin/index.html.twig');
+        $username = $roles = $this->getUser()->getUsername();
+        $template = 'admin/index.html.twig';
+
+        $args = [
+            'username' => $username
+        ];
+
+        return $this->render($template, $args);
     }
 
     /**
@@ -21,7 +28,14 @@ class AdminController extends AbstractController
      */
     public function upcoming()
     {
-        return $this->render('admin/upcoming.html.twig');
+        $username = $roles = $this->getUser()->getUsername();
+        $template = 'admin/upcoming.html.twig';
+
+        $args = [
+            'username' => $username
+        ];
+
+        return $this->render($template, $args);
     }
 
     /**
@@ -29,7 +43,14 @@ class AdminController extends AbstractController
      */
     public function create_referendum()
     {
-        return $this->render('admin/create-referendum.html.twig');
+        $username = $roles = $this->getUser()->getUsername();
+        $template = 'admin/create-referendum.html.twig';
+
+        $args = [
+            'username' => $username
+        ];
+
+        return $this->render($template, $args);
     }
 
     /**
@@ -37,7 +58,14 @@ class AdminController extends AbstractController
      */
     public function past_referendum()
     {
-        return $this->render('admin/past-referendums.html.twig');
+        $username = $roles = $this->getUser()->getUsername();
+        $template = 'admin/past-referendums.html.twig';
+
+        $args = [
+            'username' => $username
+        ];
+
+        return $this->render($template, $args);
     }
 
     /**
@@ -45,6 +73,13 @@ class AdminController extends AbstractController
      */
     public function manage_administrators()
     {
-        return $this->render('admin/manage-admins.html.twig');
+        $username = $roles = $this->getUser()->getUsername();
+        $template = 'admin/manage-admins.html.twig';
+
+        $args = [
+            'username' => $username
+        ];
+
+        return $this->render($template, $args);
     }
 }

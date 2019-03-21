@@ -14,8 +14,15 @@ class StudentController extends AbstractController
      */
     public function index()
     {
-        return $this->render('student/index.html.twig', [
-            'controller_name' => 'StudentController',
-        ]);
+        return $this->render('student/index.html.twig');
+    }
+
+    /**
+     * @Route("/student/propose", name="propose_referendum")
+     * @IsGranted("ROLE_STUDENT")
+     */
+    public function propose()
+    {
+        return $this->render('student/propose-referendum.html.twig');
     }
 }

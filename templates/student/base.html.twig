@@ -5,7 +5,7 @@
     <!-- Basic -->
     <meta charset="UTF-8">
 
-    <title>Dashboard | JSOFT Themes | JSOFT-Admin</title>
+    <title>Dashboard</title>
     <meta name="keywords" content="HTML5 Admin Template" />
     <meta name="description" content="JSOFT Admin - Responsive HTML5 Template">
     <meta name="author" content="JSOFT.net">
@@ -60,13 +60,16 @@
             <!-- start: search & user box -->
             <div class="header-right">
 
-                <span class="separator"></span>
+                <span style="visibility: hidden" class="separator"></span>
 
                 <div id="userbox" class="userbox">
                     <a href="#" data-toggle="dropdown">
+                        <figure class="profile-picture">
+                            <img src="../dashboard/images/!logged-user.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg" />
+                        </figure>
                         <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@JSOFT.com">
-                            <span class="name">B00096918</span>
-                            <span class="role">administrator</span>
+                            <span class="name">{{ username }}</span>
+                            <span style="color: black" class="role">student</span>
                         </div>
 
                         <i class="fa custom-caret"></i>
@@ -85,6 +88,29 @@
             <!-- end: search & user box -->
         </header>
         <!-- end: header -->
+        <div class="inner-wrapper">
+            <!-- start: sidebar -->
+            <aside id="sidebar-left" class="sidebar-left">
+
+                <div class="sidebar-header">
+                    <div class="sidebar-title">
+                        Navigation
+                    </div>
+                    <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+                        <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                    </div>
+                </div>
+
+                <div class="nano">
+                    <div class="nano-content">
+                        <nav id="menu" class="nav-main" role="navigation">
+                            <hr class="separator" />
+                            {% block nav %}{% endblock %}
+                        </nav>
+                    </div>
+                </div>
+
+            </aside>
 
 {% block body %}{% endblock %}
 

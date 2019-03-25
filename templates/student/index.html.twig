@@ -1,44 +1,23 @@
 {% extends 'student/base.html.twig' %}
 
+{% block nav %}
+    <ul class="nav nav-main">
+        <li class="nav-active">
+            <a href="{{ url('student') }}">
+                <span>Dashboard</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-main">
+        <li>
+            <a href="{{ url('propose_referendum') }}">
+                <span>Propose Referendum</span>
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
 {% block body %}
-    <div class="inner-wrapper">
-        <!-- start: sidebar -->
-        <aside id="sidebar-left" class="sidebar-left">
-
-            <div class="sidebar-header">
-                <div class="sidebar-title">
-                    Navigation
-                </div>
-                <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
-                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-                </div>
-            </div>
-
-            <div class="nano">
-                <div class="nano-content">
-                    <nav id="menu" class="nav-main" role="navigation">
-                        <hr class="separator" />
-                        <ul class="nav nav-main">
-                            <li class="nav-active">
-                                <a href="{{ url('student') }}">
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-main">
-                            <li>
-                                <a href="{{ url('propose_referendum') }}">
-                                    <span>Propose Referendum</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-
-        </aside>
-        <!-- end: sidebar -->
-
         <section role="main" class="content-body">
             <header class="page-header">
                 <h2>Dashboard</h2>

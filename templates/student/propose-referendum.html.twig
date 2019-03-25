@@ -1,47 +1,26 @@
 {% extends 'student/base.html.twig' %}
 
+{% block nav %}
+    <ul class="nav nav-main">
+        <li>
+            <a href="{{ url('student') }}">
+                <span>Dashboard</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-main">
+        <li class="nav-active">
+            <a href="{{ url('propose_referendum') }}">
+                <span>Propose Referendum</span>
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
 {% block body %}
-    <div class="inner-wrapper">
-        <!-- start: sidebar -->
-        <aside id="sidebar-left" class="sidebar-left">
-
-            <div class="sidebar-header">
-                <div class="sidebar-title">
-                    Navigation
-                </div>
-                <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
-                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-                </div>
-            </div>
-
-            <div class="nano">
-                <div class="nano-content">
-                    <nav id="menu" class="nav-main" role="navigation">
-                        <hr class="separator" />
-                        <ul class="nav nav-main">
-                            <li>
-                                <a href="{{ url('student') }}">
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-main">
-                            <li class="nav-active">
-                                <a href="{{ url('propose_referendum') }}">
-                                    <span>Propose Referendum</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-
-        </aside>
-        <!-- end: sidebar -->
-
         <section role="main" class="content-body">
             <header class="page-header">
-                <h2>Dashboard</h2>
+                <h2>Propose Referendum</h2>
             </header>
 
             <div class="row">
@@ -56,21 +35,20 @@
                             <p class="panel-subtitle">You can propose a referendum here and other students will be able to see and support it.</p>
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal" method="get">
+                            <form class="form-horizontal" action="{{ url('create_proposal') }}" method="POST">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label" for="textareaDefault">Details</label>
                                     <div class="col-md-6">
-                                        <textarea class="form-control" rows="3" style="height: 10em; padding-top: 0.7em;" id="textareaDefault"></textarea>
+                                        <textarea class="form-control" name="proposal" rows="3" style="height: 10em; padding-top: 0.7em;" id="textareaDefault"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-3 control-label" style="visibility: hidden" for="submit-button">Tag</label>
                                     <div class="col-md-6">
-                                        <button type="button" id="submit-button" class="mb-xs mt-xs mr-xs btn btn-primary form-horizontal">Submit</button>
+                                        <button type="submit" type="submit" id="submit-button" class="mb-xs mt-xs mr-xs btn btn-primary form-horizontal">Submit</button>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </section>

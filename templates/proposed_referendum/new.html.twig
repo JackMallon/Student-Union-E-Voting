@@ -1,0 +1,62 @@
+{% extends 'student/base.html.twig' %}
+
+{% block nav %}
+    <ul class="nav nav-main">
+        <li>
+            <a href="{{ url('student') }}">
+                <span>Dashboard</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-main">
+        <li class="nav-active">
+            <a href="{{ url('propose_referendum') }}">
+                <span>Propose Referendum</span>
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Propose Referendum</h2>
+        </header>
+
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="fa fa-caret-down"></a>
+                        </div>
+
+                        <h2 class="panel-title">Propose Referendum</h2>
+                        <p class="panel-subtitle">You can propose a referendum here and other students will be able to see and support it.</p>
+                    </header>
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="{{ url('create_proposal') }}" method="POST">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="textareaDefault">Details</label>
+                                <div class="col-md-6">
+                                    <textarea class="form-control" name="proposal" rows="3" style="height: 10em; padding-top: 0.7em;" id="textareaDefault"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" style="visibility: hidden" for="submit-button">Tag</label>
+                                <div class="col-md-6">
+                                    <button type="submit" type="submit" id="submit-button" class="mb-xs mt-xs mr-xs btn btn-primary form-horizontal">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- end: page -->
+    </section>
+    </div>
+    </section>
+{% endblock %}

@@ -40,7 +40,34 @@
                     </section>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="fa fa-caret-down"></a>
+                            </div>
+
+                            <h2 class="panel-title">Student Proposed Referendums</h2>
+                            <p class="panel-subtitle">This is a list of referendums proposed by students.</p>
+                        </header>
+                        <div class="panel-body">
+                            {% for proposed_referendum in proposed_referendums %}
+                                <h4>{{ proposed_referendum.publisher }}</h4>
+                                <p>
+                                    {{ proposed_referendum.details }}
+                                </p>
+                                <p><strong>People in support of this: {{ proposed_referendum.support }}</strong></p>
+                                <button type="button" href="{{ path('proposed_referendum_show', {'id': proposed_referendum.id}) }}" class="mb-xs mt-xs mr-xs btn btn-primary">Support this</button>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+
+                <div class="col-md-6">
                     <section class="panel">
                         <header class="panel-heading">
                             <div class="panel-actions">

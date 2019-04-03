@@ -35,8 +35,14 @@ class ProposedReferendumController extends AbstractController
     {
         $id = $request->request->get('proposal_id');
         $em = $this->getDoctrine()->getManager();
-        $student = $em->getRepository('App:ProposedReferendum')->find($id);
-        var_dump($student); exit;
+        $proposal = $em->getRepository('App:ProposedReferendum')->find((int)$id);
+
+        $support = $proposal->getSupport();
+        $proposal->setSupport($support + 1);
+
+        $em->flush();
+
+        var_dump($support); exit;
     }
 
     /**

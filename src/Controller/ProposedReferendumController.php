@@ -31,7 +31,7 @@ class ProposedReferendumController extends AbstractController
     /**
      * @Route("/support/{id}", name="proposed_referendum_support", methods={"POST"})
      */
-    public function support(ProposedReferendum $proposedReferendum, Request $request, EntityManager $entityManager): Response
+    public function support(ProposedReferendum $proposedReferendum, Request $request, ObjectManager $manager): Response
     {
         $id = $request->request->get('proposal_id');
         $em = $this->getDoctrine()->getManager();

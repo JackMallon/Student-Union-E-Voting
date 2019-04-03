@@ -84,52 +84,61 @@
                         </section>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <section class="panel">
                             <header class="panel-heading">
                                 <div class="panel-actions">
-                                    <a href="#" class="fa fa-caret-down"></a>
+                                    <button type="button" href="#" class="mb-xs mt-xs mr-xs btn btn-primary">View All</button>
                                 </div>
 
-                                <h2 class="panel-title">Proposed Referendums</h2>
-                                <p class="panel-subtitle">This is a list of the referendums proposed by the students of the college.</p>
+                                <h2 class="panel-title">Student Proposed Referendums</h2>
+                                <p class="panel-subtitle">This is a list of referendums proposed by students.</p>
                             </header>
                             <div class="panel-body">
-                                <h4>Proposed by: B00096918</h4>
+                                {% set counter = 0 %}
+                                {% for proposed_referendum in proposed_referendums %}
+                                    <h4>{{ proposed_referendum.publisher }}</h4>
+                                    <p>
+                                        {{ proposed_referendum.details }}
+                                    </p>
+                                    <p><strong>People in support of this: {{ proposed_referendum.support }}</strong></p>
+                                    <button type="button" href="{{ path('proposed_referendum_show', {'id': proposed_referendum.id}) }}" class="mb-xs mt-xs mr-xs btn btn-primary">Support this</button>
+
+                                    {% if counter < 2 %}
+                                        <hr>
+                                    {% endif %}
+                                    {% set counter = counter + 1 %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                            </div>
+                        </section>
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <button type="button" href="#" class="mb-xs mt-xs mr-xs btn btn-primary">View All</button>
+                                </div>
+
+                                <h2 class="panel-title">Upcoming Referendums</h2>
+                                <p class="panel-subtitle">This is a list of the upcoming referendums.</p>
+                            </header>
+                            <div class="panel-body">
+                                <h4>Student Elections</h4>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                                     enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
                                     in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                                     sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
-                                <p><strong>Number of people in favour: 19</strong></p>
-                                <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Create referendum</button>
-
-                                <hr>
-
-                                <h4>Proposed by: B00096918</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                    sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </p>
-                                <p><strong>Number of people in favour: 19</strong></p>
-                                <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Create referendum</button>
-
-                                <hr>
-
-                                <h4>Proposed by: B00096918</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                    sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </p>
-                                <p><strong>Number of people in favour: 19</strong></p>
-                                <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Create referendum</button>
-
-
+                                <p><strong>Date of referendum: 04/04/2019</strong></p>
+                                <button type="button" class="mb-xs mt-xs mr-xs btn btn-primary">Learn More</button>
                             </div>
                         </section>
                     </div>

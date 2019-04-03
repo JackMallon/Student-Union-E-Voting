@@ -19,7 +19,7 @@ class StudentController extends AbstractController
      */
     public function index(ProposedReferendumRepository $proposedReferendumRepository)
     {
-        $proposedReferendums = $proposedReferendumRepository->findAll();
+        $proposedReferendums = $proposedReferendumRepository->findTopThreeBySupport();
 
         $username = $roles = $this->getUser()->getUsername();
         $template = 'student/index.html.twig';

@@ -11,9 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 
 /**
- * @Route("student/propsal-referendum")
+ * @Route("student/proposed-referendum")
  */
 class ProposedReferendumController extends AbstractController
 {
@@ -25,6 +26,17 @@ class ProposedReferendumController extends AbstractController
         return $this->render('proposed_referendum/index.html.twig', [
             'proposed_referendums' => $proposedReferendumRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/support/{id}", name="proposed_referendum_support", methods={"POST"})
+     */
+    public function support(ProposedReferendum $proposedReferendum, Request $request, EntityManager $entityManager): Response
+    {
+        $id = $request->request->get('proposal_id');
+        $em = $this->getDoctrine()->getManager();
+        $student = $em->getRepository('App:ProposedReferendum')->find($id);
+        var_dump($student); exit;
     }
 
     /**
@@ -49,16 +61,6 @@ class ProposedReferendumController extends AbstractController
         return new Response(
             '<html><body><p>New controller method over there in the other controller<br>User: ' . $publisher . '<br>Proposal: ' . $details . '<br>Support: ' . $support . '</body></html>'
         );
-    }
-
-    /**
-     * @Route("/{id}", name="proposed_referendum_show", methods={"GET"})
-     */
-    public function show(ProposedReferendum $proposedReferendum): Response
-    {
-        return $this->render('proposed_referendum/show.html.twig', [
-            'proposed_referendum' => $proposedReferendum,
-        ]);
     }
 
     /**

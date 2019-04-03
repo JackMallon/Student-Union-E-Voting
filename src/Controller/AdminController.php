@@ -5,19 +5,24 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Repository\ProposedReferendumRepository;
+
 
 class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
      */
-    public function index()
+    public function index(ProposedReferendumRepository $proposedReferendumRepository)
     {
+        $proposedReferendums = $proposedReferendumRepository->findTopThreeBySupport();
+
         $username = $roles = $this->getUser()->getUsername();
         $template = 'admin/index.html.twig';
 
         $args = [
-            'username' => $username
+            'username' => $username,
+            'proposed_referendums' => $proposedReferendums
         ];
 
         return $this->render($template, $args);

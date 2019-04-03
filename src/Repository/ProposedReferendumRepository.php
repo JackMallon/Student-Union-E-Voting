@@ -19,6 +19,26 @@ class ProposedReferendumRepository extends ServiceEntityRepository
         parent::__construct($registry, ProposedReferendum::class);
     }
 
+    public function findAllOrderedBySupport()
+    {
+        return $this->findBy(array(), array('support' => 'DESC'));
+    }
+
+    public function findTopThreeBySupport()
+    {
+        $all = $this->findBy(array(), array('support' => 'DESC'));
+
+        $topThree = array();
+        $arrLength = count($all);
+        if($arrLength > 3){ $arrLength = 3; }
+
+        for($x = 0; $x < $arrLength; $x++) {
+            $topThree[$x] = $all[$x];
+        }
+
+        return $topThree;
+    }
+
     // /**
     //  * @return ProposedReferendum[] Returns an array of ProposedReferendum objects
     //  */
@@ -36,7 +56,6 @@ class ProposedReferendumRepository extends ServiceEntityRepository
     }
     */
 
-    /*
     public function findOneBySomeField($value): ?ProposedReferendum
     {
         return $this->createQueryBuilder('p')
@@ -46,5 +65,4 @@ class ProposedReferendumRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
 }

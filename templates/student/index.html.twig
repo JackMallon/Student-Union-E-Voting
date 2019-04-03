@@ -44,20 +44,34 @@
                     <section class="panel">
                         <header class="panel-heading">
                             <div class="panel-actions">
-                                <a href="#" class="fa fa-caret-down"></a>
+                                <button type="button" href="#" class="mb-xs mt-xs mr-xs btn btn-primary">View All</button>
                             </div>
 
                             <h2 class="panel-title">Student Proposed Referendums</h2>
                             <p class="panel-subtitle">This is a list of referendums proposed by students.</p>
                         </header>
                         <div class="panel-body">
+                            {% set counter = 0 %}
                             {% for proposed_referendum in proposed_referendums %}
                                 <h4>{{ proposed_referendum.publisher }}</h4>
                                 <p>
                                     {{ proposed_referendum.details }}
                                 </p>
                                 <p><strong>People in support of this: {{ proposed_referendum.support }}</strong></p>
-                                <button type="button" href="{{ path('proposed_referendum_show', {'id': proposed_referendum.id}) }}" class="mb-xs mt-xs mr-xs btn btn-primary">Support this</button>
+
+
+                                <form method="post" action="{{ path('proposed_referendum_support', {'id': proposed_referendum.id}) }}" onsubmit="return confirm('Are you sure you want to support this referendum?');">
+                                    <input type="hidden" name="_method" value="POST">
+                                    <input type="hidden" name="proposal_id" value="{{ proposed_referendum.id }}">
+                                    <button type="submit" value="{{ proposed_referendum.id }}" class="mb-xs mt-xs mr-xs btn btn-primary">
+                                        Support this
+                                    </button>
+                                </form>
+
+                                {% if counter < 2 %}
+                                    <hr>
+                                {% endif %}
+                                {% set counter = counter + 1 %}
                             {% else %}
                                 <tr>
                                     <td colspan="5">no records found</td>
@@ -67,11 +81,13 @@
                     </section>
                 </div>
 
+
+
                 <div class="col-md-6">
                     <section class="panel">
                         <header class="panel-heading">
                             <div class="panel-actions">
-                                <a href="#" class="fa fa-caret-down"></a>
+                                <button type="button" href="#" class="mb-xs mt-xs mr-xs btn btn-primary">View All</button>
                             </div>
 
                             <h2 class="panel-title">Upcoming Referendums</h2>
@@ -91,7 +107,6 @@
                     </section>
                 </div>
             </div>
-
             <!-- end: page -->
         </section>
     </div>

@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use App\Controller\StudentController;
 
 /**
  * @Route("student/proposed-referendum")
@@ -31,7 +32,7 @@ class ProposedReferendumController extends AbstractController
     /**
      * @Route("/support/{id}", name="proposed_referendum_support", methods={"POST"})
      */
-    public function support(ProposedReferendum $proposedReferendum, Request $request, ObjectManager $manager): Response
+    public function support(Request $request): Response
     {
         $id = $request->request->get('proposal_id');
         $em = $this->getDoctrine()->getManager();
@@ -42,7 +43,7 @@ class ProposedReferendumController extends AbstractController
 
         $em->flush();
 
-        var_dump($support); exit;
+        return $this->redirectToRoute("student");
     }
 
     /**

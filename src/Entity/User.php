@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -36,6 +38,22 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $role;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ProposedReferendumStudent", mappedBy="ProposalReferendum")
+     */
+    private $y;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ProposedReferendumStudent", mappedBy="ProposedReferendum")
+     */
+    private $proposedReferendumStudents;
+
+    public function __construct()
+    {
+        $this->y = new ArrayCollection();
+        $this->proposedReferendumStudents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -101,6 +119,62 @@ class User implements UserInterface
     public function getSalt() {}
 
     public function eraseCredentials() {}
+
+    /**
+     * @return Collection|ProposedReferendumStudent[]
+     */
+    public function getY(): Collection
+    {
+        return $this->y;
+    }
+
+    public function addY(ProposedReferendumStudent $y): self
+    {
+        if (!$this->y->contains($y)) {
+            $this->y[] = $y;
+            $y->addProposalReferendum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeY(ProposedReferendumStudent $y): self
+    {
+        if ($this->y->contains($y)) {
+            $this->y->removeElement($y);
+            $y->removeProposalReferendum($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProposedReferendumStudent[]
+     */
+    public function getProposedReferendumStudents(): Collection
+    {
+        return $this->proposedReferendumStudents;
+    }
+
+    public function addProposedReferendumStudent(ProposedReferendumStudent $proposedReferendumStudent): self
+    {
+        if (!$this->proposedReferendumStudents->contains($proposedReferendumStudent)) {
+            $this->proposedReferendumStudents[] = $proposedReferendumStudent;
+            $proposedReferendumStudent->addProposedReferendum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProposedReferendumStudent(ProposedReferendumStudent $proposedReferendumStudent): self
+    {
+        if ($this->proposedReferendumStudents->contains($proposedReferendumStudent)) {
+            $this->proposedReferendumStudents->removeElement($proposedReferendumStudent);
+            $proposedReferendumStudent->removeProposedReferendum($this);
+        }
+
+        return $this;
+    }
 
 
 }

@@ -37,6 +37,7 @@ class ProposedReferendumController extends AbstractController
     public function support(Request $request, ProposedReferendumUserRepository $proposedReferendumUserRepository): Response
     {
         $referendumId = $request->request->get('proposal_id');
+        $url = $request->request->get('url');
         $userId = $this->getUser()->getId();
 
         if($proposedReferendumUserRepository->findReferendumUser($referendumId, $userId)){
@@ -53,7 +54,7 @@ class ProposedReferendumController extends AbstractController
             $manager->flush();
         }
 
-        return $this->redirectToRoute("student");
+        return $this->redirectToRoute($url);
     }
 
     /**

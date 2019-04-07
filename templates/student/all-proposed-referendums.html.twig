@@ -2,7 +2,7 @@
 
 {% block nav %}
     <ul class="nav nav-main">
-        <li class="nav-active">
+        <li>
             <a href="{{ url('student') }}">
                 <span>Dashboard</span>
             </a>
@@ -12,6 +12,20 @@
         <li>
             <a href="{{ url('propose_referendum') }}">
                 <span>Propose Referendum</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-main">
+        <li class="nav-active">
+            <a href="{{ url('view_all_proposals_student') }}">
+                <span>All Proposed Referendums</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-main">
+        <li>
+            <a href="{{ url('view_all_upcoming_student') }}">
+                <span>All Upcoming Referendums</span>
             </a>
         </li>
     </ul>
@@ -27,10 +41,6 @@
             <div class="col-md-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        <div class="panel-actions">
-                            <button type="button" href="#" class="mb-xs mt-xs mr-xs btn btn-primary">View All</button>
-                        </div>
-
                         <h2 class="panel-title">Student Proposed Referendums</h2>
                         <p class="panel-subtitle">This is a list of referendums proposed by students.</p>
                     </header>
@@ -45,13 +55,14 @@
 
                             {% if proposed_referendum.id in supported_referendums %}
                                 <button style="background-color: #014C6C" class="mb-xs mt-xs mr-xs btn btn-primary">
-                                    Supported
+                                    Revoke Support
                                 </button>
                             {% else %}
 
                                 <form method="post" action="{{ path('proposed_referendum_support', {'id': proposed_referendum.id}) }}" onsubmit="return confirm('Are you sure you want to support this referendum?');">
                                     <input type="hidden" name="_method" value="POST">
                                     <input type="hidden" name="proposal_id" value="{{ proposed_referendum.id }}">
+                                    <input type="hidden" name="url" value="{{ url }}">
                                     <button type="submit" value="{{ proposed_referendum.id }}" class="mb-xs mt-xs mr-xs btn btn-primary">
                                         Support this
                                     </button>
@@ -61,7 +72,7 @@
 
 
 
-                            {% if counter < 2 %}
+                            {% if counter < array_length %}
                                 <hr>
                             {% endif %}
                             {% set counter = counter + 1 %}

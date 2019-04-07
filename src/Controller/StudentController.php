@@ -24,6 +24,8 @@ class StudentController extends AbstractController
 
         $userId = $this->getUser()->getId();
 
+        $url = "student";
+
         $supportedReferendums = $proposedReferendumUserRepository->findAllSupportedByUser($userId);
 
         $username = $roles = $this->getUser()->getUsername();
@@ -32,7 +34,8 @@ class StudentController extends AbstractController
         $args = [
             'username' => $username,
             'proposed_referendums' => $proposedReferendums,
-            'supported_referendums' => $supportedReferendums
+            'supported_referendums' => $supportedReferendums,
+            'url' => $url
         ];
 
         return $this->render($template, $args);
@@ -78,5 +81,50 @@ class StudentController extends AbstractController
         return new Response(
             '<html><body><p>User: ' . $publisher . '<br>Proposal: ' . $details . '<br>Support: ' . $support . '</body></html>'
         );
+    }
+
+    /**
+     * @Route("/student/proposals", name="view_all_proposals_student")
+     * @IsGranted("ROLE_STUDENT")
+     */
+    public function viewAllProposals(ProposedReferendumRepository $proposedReferendumRepository, ProposedReferendumUserRepository $proposedReferendumUserRepository)
+    {
+        $proposedReferendums = $proposedReferendumRepository->findAllOrderedBySupport();
+        $userId = $this->getUser()->getId();
+        $supportedReferendums = $proposedReferendumUserRepository->findAllSupportedByUser($userId);
+        $url = "viewAllProposals";
+
+        $arrayLength = count($proposedReferendums) - 1;
+
+        $username = $roles = $this->getUser()->getUsername();
+        $template = 'student/all-proposed-referendums.html.twig';
+
+        $args = [
+            'username' => $username,
+            'proposed_referendums' => $proposedReferendums,
+            'supported_referendums' => $supportedReferendums,
+            'array_length' => $arrayLength,
+            'url' => $url
+        ];
+
+        return $this->render($template, $args);
+        #var_dump($supportedReferendums); exit;
+    }
+
+    /**
+     * @Route("/student/upcoming", name="view_all_upcoming_student")
+     * @IsGranted("ROLE_STUDENT")
+     */
+    public function viewAllUpcoming()
+    {
+        $username = $roles = $this->getUser()->getUsername();
+        $template = 'student/upcoming-referendums.html.twig';
+
+        $args = [
+            'username' => $username
+        ];
+
+        return $this->render($template, $args);
+        #var_dump($supportedReferendums); exit;
     }
 }

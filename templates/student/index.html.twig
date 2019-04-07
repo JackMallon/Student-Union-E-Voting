@@ -59,6 +59,9 @@
                                 </p>
                                 <p><strong>People in support of this: {{ proposed_referendum.support }}</strong></p>
 
+                                {% if proposed_referendum.id in myArray %}
+
+                                {% else %}
 
                                 <form method="post" action="{{ path('proposed_referendum_support', {'id': proposed_referendum.id}) }}" onsubmit="return confirm('Are you sure you want to support this referendum?');">
                                     <input type="hidden" name="_method" value="POST">
@@ -67,6 +70,10 @@
                                         Support this
                                     </button>
                                 </form>
+
+                                {% endif %}
+
+
 
                                 {% if counter < 2 %}
                                     <hr>

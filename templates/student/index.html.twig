@@ -59,17 +59,19 @@
                                 </p>
                                 <p><strong>People in support of this: {{ proposed_referendum.support }}</strong></p>
 
-                                {% if proposed_referendum.id in myArray %}
-
+                                {% if proposed_referendum.id in supported_referendums %}
+                                    <button style="background-color: #014C6C" class="mb-xs mt-xs mr-xs btn btn-primary">
+                                        Supported
+                                    </button>
                                 {% else %}
 
-                                <form method="post" action="{{ path('proposed_referendum_support', {'id': proposed_referendum.id}) }}" onsubmit="return confirm('Are you sure you want to support this referendum?');">
-                                    <input type="hidden" name="_method" value="POST">
-                                    <input type="hidden" name="proposal_id" value="{{ proposed_referendum.id }}">
-                                    <button type="submit" value="{{ proposed_referendum.id }}" class="mb-xs mt-xs mr-xs btn btn-primary">
-                                        Support this
-                                    </button>
-                                </form>
+                                    <form method="post" action="{{ path('proposed_referendum_support', {'id': proposed_referendum.id}) }}" onsubmit="return confirm('Are you sure you want to support this referendum?');">
+                                        <input type="hidden" name="_method" value="POST">
+                                        <input type="hidden" name="proposal_id" value="{{ proposed_referendum.id }}">
+                                        <button type="submit" value="{{ proposed_referendum.id }}" class="mb-xs mt-xs mr-xs btn btn-primary">
+                                            Support this
+                                        </button>
+                                    </form>
 
                                 {% endif %}
 

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Repository\ProposedReferendumRepository;
+use App\Repository\ProposedReferendumUserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -17,19 +18,25 @@ class StudentController extends AbstractController
      * @Route("/student", name="student")
      * @IsGranted("ROLE_STUDENT")
      */
-    public function index(ProposedReferendumRepository $proposedReferendumRepository)
+    public function index(ProposedReferendumRepository $proposedReferendumRepository, ProposedReferendumUserRepository $proposedReferendumUserRepository)
     {
         $proposedReferendums = $proposedReferendumRepository->findTopThreeBySupport();
+
+        $userId = $this->getUser()->getId();
+
+        $supportedReferendums = $proposedReferendumUserRepository->findAllSupportedByUser($userId);
 
         $username = $roles = $this->getUser()->getUsername();
         $template = 'student/index.html.twig';
 
         $args = [
             'username' => $username,
-            'proposed_referendums' => $proposedReferendums
+            'proposed_referendums' => $proposedReferendums,
+            'supported_referendums' => $supportedReferendums
         ];
 
         return $this->render($template, $args);
+        #var_dump($supportedReferendums); exit;
     }
 
     /**

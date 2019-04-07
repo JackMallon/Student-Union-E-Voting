@@ -31,6 +31,19 @@ class ProposedReferendumUserRepository extends ServiceEntityRepository
         return true;
     }
 
+    public function findAllSupportedByUser($userId)
+    {
+        $supportedReferendums = $this->findBy(array('User' => $userId ));
+
+        $supportedIds = array();
+
+        for($x = 0; $x < count($supportedReferendums); $x++) {
+            $supportedIds[$x] = $supportedReferendums[$x]->getProposedReferendum();
+        }
+
+        return $supportedIds;
+    }
+
 
     // /**
     //  * @return ProposedReferendumUser[] Returns an array of ProposedReferendumUser objects

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\ProposedReferendum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method ProposedReferendum|null find($id, $lockMode = null, $lockVersion = null)

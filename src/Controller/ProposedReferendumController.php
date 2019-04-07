@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\ProposedReferendum;
+use App\Entity\ProposedReferendumUser;
 use App\Form\ProposedReferendumType;
 use App\Repository\ProposedReferendumRepository;
+use App\Repository\ProposedReferendumUserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,16 +34,24 @@ class ProposedReferendumController extends AbstractController
     /**
      * @Route("/support/{id}", name="proposed_referendum_support", methods={"POST"})
      */
-    public function support(Request $request): Response
+    public function support(Request $request, ProposedReferendumUserRepository $proposedReferendumUserRepository): Response
     {
-        $id = $request->request->get('proposal_id');
-        $em = $this->getDoctrine()->getManager();
-        $proposal = $em->getRepository('App:ProposedReferendum')->find((int)$id);
+        $referendumId = $request->request->get('proposal_id');
+        $userId = $this->getUser()->getId();
 
-        $support = $proposal->getSupport();
-        $proposal->setSupport($support + 1);
+        if($proposedReferendumUserRepository->findReferendumUser($referendumId, $userId)){
+            $manager = $this->getDoctrine()->getManager();
+            $proposedReferendum = $manager->getRepository('App:ProposedReferendum')->find((int)$referendumId);
+            $support = $proposedReferendum->getSupport();
+            $proposedReferendum->setSupport($support + 1);
 
-        $em->flush();
+            $proposedReferendumUser = new ProposedReferendumUser();
+            $proposedReferendumUser->setProposedReferendum($referendumId);
+            $proposedReferendumUser->setUser($userId);
+
+            $manager->persist($proposedReferendumUser);
+            $manager->flush();
+        }
 
         return $this->redirectToRoute("student");
     }

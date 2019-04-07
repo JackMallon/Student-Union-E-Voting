@@ -3,6 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProposedReferendumRepository")

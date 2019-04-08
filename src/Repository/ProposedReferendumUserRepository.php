@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\ProposedReferendumUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Entity\ProposedReferendum;
 
 /**
  * @method ProposedReferendumUser|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,16 +20,51 @@ class ProposedReferendumUserRepository extends ServiceEntityRepository
         parent::__construct($registry, ProposedReferendumUser::class);
     }
 
-    public function findReferendumUser($referendumId, $userId)
+    public function canSupport(ProposedReferendum $proposedReferendum, int $userId)
+    {
+        $referendumId = $proposedReferendum->getId();
+
+        if($this->hasSupported($referendumId, $userId)){
+            return false;
+        }
+
+        // if get here - then not previously supported, so create new user support record
+        // (1) update support TOTAL
+        $support = $proposedReferendum->getSupport();
+        $proposedReferendum->setSupport($support + 1);
+        $this->getEntityManager()->persist($proposedReferendum);
+        $this->getEntityManager()->flush();
+
+        // create new Referednum USer record
+        $this->newReferendumUser($userId, $referendumId);
+
+        return true;
+
+    }
+
+    public function newReferendumUser(int $userId, int $referendumId)
+    {
+        $proposedReferendumUser = new ProposedReferendumUser();
+        $proposedReferendumUser->setProposedReferendum($referendumId);
+        $proposedReferendumUser->setUser($userId);
+
+        $this->getEntityManager()->persist($proposedReferendumUser);
+        $this->getEntityManager()->flush();
+    }
+
+    public function hasSupported($referendumId, $userId)
     {
         $recordExists = $this->findOneBy([
             'ProposedReferendum' => $referendumId,
             'User' => $userId,
         ]);
-        if(isset($recordExists)){
-            return false;
-        }
-        return true;
+
+        return isset($recordExists);
+
+//        if(isset($recordExists)){
+//            return false;
+//        }
+//        return true;
     }
 
     public function findAllSupportedByUser($userId)

@@ -34,24 +34,14 @@ class ProposedReferendumController extends AbstractController
     /**
      * @Route("/support/{id}", name="proposed_referendum_support", methods={"POST"})
      */
-    public function support(Request $request, ProposedReferendumUserRepository $proposedReferendumUserRepository): Response
+    public function support(Request $request, ProposedReferendum $proposedReferendum, ProposedReferendumUserRepository $proposedReferendumUserRepository): Response
     {
-        $referendumId = $request->request->get('proposal_id');
+        //$referendumId = $request->request->get('proposal_id');
         $url = $request->request->get('url');
         $userId = $this->getUser()->getId();
 
-        if($proposedReferendumUserRepository->findReferendumUser($referendumId, $userId)){
-            $manager = $this->getDoctrine()->getManager();
-            $proposedReferendum = $manager->getRepository('App:ProposedReferendum')->find((int)$referendumId);
-            $support = $proposedReferendum->getSupport();
-            $proposedReferendum->setSupport($support + 1);
-
-            $proposedReferendumUser = new ProposedReferendumUser();
-            $proposedReferendumUser->setProposedReferendum($referendumId);
-            $proposedReferendumUser->setUser($userId);
-
-            $manager->persist($proposedReferendumUser);
-            $manager->flush();
+        if(!$proposedReferendumUserRepository->canSupport($proposedReferendum, $userId)){
+            return $this->render('error.html.twig', ['message' => 'cannot support same reference dum']);
         }
 
         return $this->redirectToRoute($url);

@@ -79,18 +79,18 @@
                                 <p class="panel-subtitle">You can propose a referendum here and other students will be able to see and support it.</p>
                             </header>
                             <div class="panel-body">
-                                <form class="form-horizontal" action="{{ url('proposed_referendum_new') }}" method="POST">
+                                <form class="form-horizontal" action="{{ url('referendum_new') }}" method="POST">
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="inputDefault">Title</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="inputDefault">
+                                            <input type="text" name="title" class="form-control" id="inputDefault">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textareaDefault">Details</label>
                                         <div class="col-md-6">
-                                            <textarea class="form-control" name="proposal" rows="3" style="height: 10em; padding-top: 0.7em;" id="textareaDefault"></textarea>
+                                            <textarea name="details" class="form-control" name="proposal" rows="3" style="height: 10em; padding-top: 0.7em;" id="textareaDefault"></textarea>
                                         </div>
                                     </div>
 
@@ -101,7 +101,7 @@
 														<span class="input-group-addon">
 															<i class="fa fa-calendar"></i>
 														</span>
-                                                <input type="text" data-plugin-datepicker class="form-control">
+                                                <input name="start-date" type="text" data-plugin-datepicker class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@
 														<span class="input-group-addon">
 															<i class="fa fa-clock-o"></i>
 														</span>
-                                                <input type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 15 }'>
+                                                <input name="start-time" type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 15 }'>
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@
 														<span class="input-group-addon">
 															<i class="fa fa-calendar"></i>
 														</span>
-                                                <input type="text" data-plugin-datepicker class="form-control">
+                                                <input name="end-date" type="text" data-plugin-datepicker class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
 														<span class="input-group-addon">
 															<i class="fa fa-clock-o"></i>
 														</span>
-                                                <input type="text" data-plugin-timepicker class="form-control">
+                                                <input name="end-time" type="text" data-plugin-timepicker class="form-control">
                                             </div>
                                         </div>
                                     </div>

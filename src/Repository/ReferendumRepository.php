@@ -19,6 +19,67 @@ class ReferendumRepository extends ServiceEntityRepository
         parent::__construct($registry, Referendum::class);
     }
 
+    public function addReferendum($formRequest)
+    {
+        $referendum = new Referendum();
+        $referendum->setTitle($formRequest->request->get('title'));
+        $referendum->setDetails($formRequest->request->get('details'));
+        $referendum->setStartDate($formRequest->request->get('start-date'));
+        $this->getEntityManager()->persist($referendum);
+        $this->getEntityManager()->flush();
+    }
+
+    public function findThree()
+    {
+        $all = $this->findAll();
+
+        $topThree = array();
+        $arrLength = count($all);
+        if($arrLength > 3){ $arrLength = 3; }
+
+        for($x = 0; $x < $arrLength; $x++) {
+            $topThree[$x] = $all[$x];
+        }
+
+        return $topThree;
+    }
+
+    public function findTodaysReferendums(){
+        $all = $this->findAll();
+
+        $todays = array();
+        $arrLength = count($all);
+
+        for($x = 0; $x < $arrLength; $x++) {
+            $stage = $this->pastPresFut($all[$x]->getStartDate());
+            if($stage == "today"){
+                $todays[$x] = $all[$x];
+            }
+        }
+
+        return $todays;
+
+    }
+
+    public function pastPresFut($referendumDate){
+        $todaysDate = date('m/d/Y');
+
+        $time = strtotime($referendumDate);
+        $formattedRefDate = date('Y-m-d',$time);
+        $time = strtotime($todaysDate);
+        $formattedTodayDate = date('Y-m-d',$time);
+
+        if($formattedRefDate < $formattedTodayDate) {
+            return "past";
+        }
+        if($formattedRefDate > $formattedTodayDate) {
+            return "future";
+        }
+        if($formattedRefDate == $formattedTodayDate) {
+            return "today";
+        }
+    }
+
     // /**
     //  * @return Referendum[] Returns an array of Referendum objects
     //  */

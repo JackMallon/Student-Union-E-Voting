@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Repository\ProposedReferendumRepository;
+use App\Repository\ReferendumRepository;
 use App\Repository\ProposedReferendumUserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,28 +19,39 @@ class StudentController extends AbstractController
      * @Route("/student", name="student")
      * @IsGranted("ROLE_STUDENT")
      */
-    public function index(ProposedReferendumRepository $proposedReferendumRepository, ProposedReferendumUserRepository $proposedReferendumUserRepository)
+    public function index(ProposedReferendumRepository $proposedReferendumRepository, ProposedReferendumUserRepository $proposedReferendumUserRepository, ReferendumRepository $referendumRepository)
     {
         $proposedReferendums = $proposedReferendumRepository->findTopThreeBySupport();
+
+        $referendums = $referendumRepository->findThree();
 
         $userId = $this->getUser()->getId();
 
         $url = "student";
+
+        $refArrayLength = count($referendums) - 1;
+        $propArrayLength = count($proposedReferendums) - 1;
 
         $supportedReferendums = $proposedReferendumUserRepository->findAllSupportedByUser($userId);
 
         $username = $roles = $this->getUser()->getUsername();
         $template = 'student/index.html.twig';
 
+        $todaysReferendums = $referendumRepository->findTodaysReferendums();
+
         $args = [
             'username' => $username,
             'proposed_referendums' => $proposedReferendums,
             'supported_referendums' => $supportedReferendums,
+            'referendums' => $referendums,
+            'refArrayLength' => $refArrayLength,
+            'propArrayLength' => $propArrayLength,
+            'todaysReferendums' => $todaysReferendums,
             'url' => $url
         ];
 
         return $this->render($template, $args);
-        #var_dump($supportedReferendums); exit;
+        #var_dump($month); exit;
     }
 
     /**
@@ -92,7 +104,7 @@ class StudentController extends AbstractController
         $proposedReferendums = $proposedReferendumRepository->findAllOrderedBySupport();
         $userId = $this->getUser()->getId();
         $supportedReferendums = $proposedReferendumUserRepository->findAllSupportedByUser($userId);
-        $url = "viewAllProposals";
+        $url = "view_all_proposals_student";
 
         $arrayLength = count($proposedReferendums) - 1;
 

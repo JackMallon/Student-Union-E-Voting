@@ -27,9 +27,9 @@ class Referendum
     private $details;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private $date;
+    private $startDate;
 
     public function getId(): ?int
     {
@@ -60,14 +60,14 @@ class Referendum
         return $this;
     }
 
-    public function getDate(): ?int
+    public function getStartDate(): ?string
     {
-        return $this->date;
+        return $this->startDate;
     }
 
-    public function setDate(int $date): self
+    public function setStartDate(string $startDate): self
     {
-        $this->date = $date;
+        $this->startDate = $startDate;
 
         return $this;
     }

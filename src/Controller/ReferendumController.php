@@ -26,12 +26,12 @@ class ReferendumController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="referendum_new", methods={"POST"})
+     * @Route("/new", name="referendum_new", methods={"GET","POST"})
      */
     public function new(Request $request, ReferendumRepository $referendumRepository): Response
     {
-        #$referendumRepository->addReferendum($request);
-        var_dump("Hey"); exit;
+        $referendumRepository->addReferendum($request);
+        var_dump($myDate = date('m/d/Y')); exit;
     }
 
     /**

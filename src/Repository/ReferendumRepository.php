@@ -58,6 +58,39 @@ class ReferendumRepository extends ServiceEntityRepository
         }
 
         return $todays;
+    }
+
+    public function findUpcoming(){
+        $all = $this->findAll();
+
+        $todays = array();
+        $arrLength = count($all);
+
+        for($x = 0; $x < $arrLength; $x++) {
+            $stage = $this->pastPresFut($all[$x]->getStartDate());
+            if($stage == "future"){
+                $todays[$x] = $all[$x];
+            }
+        }
+
+        return $todays;
+
+    }
+
+    public function findPast(){
+        $all = $this->findAll();
+
+        $todays = array();
+        $arrLength = count($all);
+
+        for($x = 0; $x < $arrLength; $x++) {
+            $stage = $this->pastPresFut($all[$x]->getStartDate());
+            if($stage == "past"){
+                $todays[$x] = $all[$x];
+            }
+        }
+
+        return $todays;
 
     }
 
@@ -66,6 +99,7 @@ class ReferendumRepository extends ServiceEntityRepository
 
         $time = strtotime($referendumDate);
         $formattedRefDate = date('Y-m-d',$time);
+
         $time = strtotime($todaysDate);
         $formattedTodayDate = date('Y-m-d',$time);
 

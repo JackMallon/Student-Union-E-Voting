@@ -22,22 +22,19 @@ class StudentController extends AbstractController
     public function index(ProposedReferendumRepository $proposedReferendumRepository, ProposedReferendumUserRepository $proposedReferendumUserRepository, ReferendumRepository $referendumRepository)
     {
         $proposedReferendums = $proposedReferendumRepository->findTopThreeBySupport();
-
+        $todaysReferendums = $referendumRepository->findTodaysReferendums();
         $referendums = $referendumRepository->findThree();
-
         $userId = $this->getUser()->getId();
-
-        $url = "student";
+        $supportedReferendums = $proposedReferendumUserRepository->findAllSupportedByUser($userId);
 
         $refArrayLength = count($referendums) - 1;
         $propArrayLength = count($proposedReferendums) - 1;
-
-        $supportedReferendums = $proposedReferendumUserRepository->findAllSupportedByUser($userId);
+        $todayArrayLength = count($todaysReferendums) - 1;
 
         $username = $roles = $this->getUser()->getUsername();
         $template = 'student/index.html.twig';
+        $url = "student";
 
-        $todaysReferendums = $referendumRepository->findTodaysReferendums();
 
         $args = [
             'username' => $username,
@@ -47,11 +44,12 @@ class StudentController extends AbstractController
             'refArrayLength' => $refArrayLength,
             'propArrayLength' => $propArrayLength,
             'todaysReferendums' => $todaysReferendums,
+            'todayArrayLength' => $todayArrayLength,
             'url' => $url
         ];
 
         return $this->render($template, $args);
-        #var_dump($month); exit;
+        #var_dump($todaysReferendums); exit;
     }
 
     /**
@@ -127,16 +125,21 @@ class StudentController extends AbstractController
      * @Route("/student/upcoming", name="view_all_upcoming_student")
      * @IsGranted("ROLE_STUDENT")
      */
-    public function viewAllUpcoming()
+    public function viewAllUpcoming(ReferendumRepository $referendumRepository)
     {
         $username = $roles = $this->getUser()->getUsername();
         $template = 'student/upcoming-referendums.html.twig';
+        $referendums = $referendumRepository->findUpcoming();
+        $refArrayLength = count($referendums) - 1;
+
 
         $args = [
-            'username' => $username
+            'username' => $username,
+            'referendums' => $referendums,
+            'refArrayLength' => $refArrayLength
         ];
 
         return $this->render($template, $args);
-        #var_dump($supportedReferendums); exit;
+        #var_dump($referendums); exit;
     }
 }

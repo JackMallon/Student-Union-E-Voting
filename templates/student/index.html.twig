@@ -50,21 +50,29 @@
                         </header>
                         <div class="panel-body">
                             {% set counter = 0 %}
-                            {% for referendum in referendums %}
+                            {% for referendum in todaysReferendums %}
 
                                 <h4>{{ referendum.title }}</h4>
                                 <p>
                                     {{ referendum.details }}
                                 </p>
-                                <p><strong>Date of referendum: {{ referendum.startDate }}</strong></p>
 
-                                {% if counter < refArrayLength %}
+                                <form method="post" action="#" onsubmit="return ;">
+                                    <input type="hidden" name="_method" value="POST">
+                                    <input type="hidden" name="proposal_id">
+                                    <input type="hidden" name="url" value="{{ url }}">
+                                    <button type="submit" class="mb-xs mt-xs mr-xs btn btn-primary">
+                                        Vote on this
+                                    </button>
+                                </form>
+
+                                {% if counter < todayArrayLength %}
                                     <hr>
                                 {% endif %}
                                 {% set counter = counter + 1 %}
                             {% else %}
                                 <tr>
-                                    <td colspan="5">no records found</td>
+                                    <h4>No referendums today</h4>
                                 </tr>
                             {% endfor %}
                         </div>

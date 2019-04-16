@@ -68,9 +68,46 @@
                 </header>
 
                 <div class="row">
+                    <div class="col-md-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <h2 class="panel-title">Upcoming Referendums</h2>
+                                <p class="panel-subtitle">This is a list of the upcoming referendums.</p>
+                            </header>
+                            <div class="panel-body">
 
+                                {% set counter = 0 %}
+                                {% for referendum in referendums %}
+
+                                    <h4>{{ referendum.title }}</h4>
+                                    <p>
+                                        {{ referendum.details }}
+                                    </p>
+                                    <p><strong>Date of referendum: {{ referendum.startDate }}</strong></p>
+
+                                    <form method="post" action="#" onsubmit="return ;">
+                                        <input type="hidden" name="_method" value="POST">
+                                        <input type="hidden" name="proposal_id">
+                                        <button type="submit" class="mb-xs mt-xs mr-xs btn btn-primary">
+                                            See details
+                                        </button>
+                                    </form>
+
+                                    {% if counter < refArrayLength %}
+                                        <hr>
+                                    {% endif %}
+                                    {% set counter = counter + 1 %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5">no records found</td>
+                                    </tr>
+                                {% endfor %}
+
+
+                            </div>
+                        </section>
+                    </div>
                 </div>
-
                 <!-- end: page -->
             </section>
         </div>

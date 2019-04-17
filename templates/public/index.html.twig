@@ -14,44 +14,21 @@
             <div class="container">
                 <p class="style1 center">Here are a few of the upcoming referendums that you have a say in.</p>
 
-                <div class="referendum-container">
-                    <div class="ref-container-summary">
-                        <h2>New SU representatives</h2>
-                        <p style="margin-top: -0.8em;">Voting on: 15/4/19</p>
-                        <p>Vote for the new president, vice president, entertainments officer and head of clubs and societies.</p>
+                {% set counter = 0 %}
+                {% for referendum in referendums %}
+                    <div class="referendum-container">
+                        <div class="ref-container-summary">
+                            <h2>{{ referendum.title }}</h2>
+                            <p style="margin-top: -0.8em;">{{ referendum.startDate }}</p>
+                            <p>{{ referendum.details }}</p>
+                        </div>
+                        <div class="ref-container-vote">
+                            <ul class="actions" style="margin-top: 0em;">
+                                <li><a href="{{ url('student') }}" class="button style3 large" style="background-color: #014C6C">Vote now</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="ref-container-vote">
-                        <ul class="actions" style="margin-top: 0em;">
-                            <li><a href="#" class="button style3 large" style="background-color: #014C6C">Vote now</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="referendum-container">
-                    <div class="ref-container-summary">
-                        <h2>New SU representatives</h2>
-                        <p style="margin-top: -0.8em;">Voting on: 15/4/19</p>
-                        <p>Vote for the new president, vice president, entertainments officer and head of clubs and societies</p>
-                    </div>
-                    <div class="ref-container-vote">
-                        <ul class="actions" style="margin-top: 0em;">
-                            <li><a href="#" class="button style3 large" style="background-color: #014C6C">Vote now</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="referendum-container">
-                    <div class="ref-container-summary">
-                        <h2>New SU representatives</h2>
-                        <p style="margin-top: -0.8em;">Voting on: 15/4/19</p>
-                        <p>Vote for the new president, vice president, entertainments officer and head of clubs and societies</p>
-                    </div>
-                    <div class="ref-container-vote">
-                        <ul class="actions" style="margin-top: 0em;">
-                            <li><a href="#" class="button style3 large" style="background-color: #014C6C">Vote now</a></li>
-                        </ul>
-                    </div>
-                </div>
+                {% endfor %}
 
                 <ul class="actions">
                     <li><a href="{{ url('upcoming') }}" class="button style3 large">View All</a></li>

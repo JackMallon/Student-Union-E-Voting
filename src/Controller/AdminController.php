@@ -13,6 +13,7 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(ProposedReferendumRepository $proposedReferendumRepository, ProposedReferendumUserRepository $proposedReferendumUserRepository, ReferendumRepository $referendumRepository)
     {
@@ -49,6 +50,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/upcoming", name="admin_upcoming")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function upcoming(ReferendumRepository $referendumRepository)
     {
@@ -70,6 +72,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/create-referendum", name="create_referendum")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create_referendum()
     {
@@ -85,6 +88,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/past-referendums", name="past_referendums")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function past_referendum(ReferendumRepository $referendumRepository)
     {
@@ -106,6 +110,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/manage-administrators", name="manage_admins")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function manage_administrators()
     {

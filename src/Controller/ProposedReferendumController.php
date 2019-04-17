@@ -15,22 +15,14 @@ use Symfony\Component\Console\Logger\ConsoleLogger;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use App\Controller\StudentController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("student/proposed-referendum")
+ * @IsGranted("ROLE_STUDENT")
  */
 class ProposedReferendumController extends AbstractController
 {
-    /**
-     * @Route("/", name="proposed_referendum_index", methods={"GET"})
-     */
-    public function index(ProposedReferendumRepository $proposedReferendumRepository): Response
-    {
-        return $this->render('proposed_referendum/index.html.twig', [
-            'proposed_referendums' => $proposedReferendumRepository->findAll(),
-        ]);
-    }
-
     /**
      * @Route("/support/{id}", name="proposed_referendum_support", methods={"POST"})
      */
@@ -66,44 +58,6 @@ class ProposedReferendumController extends AbstractController
         $manager->flush();
 
 
-        return new Response(
-            '<html><body><p>New controller method over there in the other controller<br>User: ' . $publisher . '<br>Proposal: ' . $details . '<br>Support: ' . $support . '</body></html>'
-        );
-    }
-
-    /**
-     * @Route("/{id}/edit", name="proposed_referendum_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, ProposedReferendum $proposedReferendum): Response
-    {
-        $form = $this->createForm(ProposedReferendumType::class, $proposedReferendum);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('proposed_referendum_index', [
-                'id' => $proposedReferendum->getId(),
-            ]);
-        }
-
-        return $this->render('proposed_referendum/edit.html.twig', [
-            'proposed_referendum' => $proposedReferendum,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="proposed_referendum_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, ProposedReferendum $proposedReferendum): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$proposedReferendum->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($proposedReferendum);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('proposed_referendum_index');
+        return $this->redirectToRoute('view_all_proposals_student');
     }
 }

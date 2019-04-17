@@ -21,7 +21,11 @@ class ReferendumUserRepository extends ServiceEntityRepository
 
     public function voteFor($userId, $referendumId)
     {
-
+        $referendumUser = new ReferendumUser();
+        $referendumUser->setUser($userId);
+        $referendumUser->setReferendum($referendumId);
+        $this->getEntityManager()->persist($referendumUser);
+        $this->getEntityManager()->flush();
     }
 
     // /**

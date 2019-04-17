@@ -58,10 +58,9 @@
                                 </p>
 
                                 <form method="post" action="{{ path('vote_referendum') }}">
-                                    <input type="hidden" name="proposal_id" value="{{ referendum.id }}">
-                                    <input type="hidden" name="url" value="{{ url }}">
+                                    <input type="hidden" name="id" value="{{ referendum.id }}">
                                     <button type="submit" class="mb-xs mt-xs mr-xs btn btn-primary">
-                                        Support this
+                                        Vote on this
                                     </button>
                                 </form>
 

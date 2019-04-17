@@ -10,22 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/referendum")
+ * @IsGranted("ROLE_STUDENT")
  */
 class ReferendumController extends AbstractController
 {
-    /**
-     * @Route("/", name="referendum_index", methods={"GET"})
-     */
-    public function index(ReferendumRepository $referendumRepository): Response
-    {
-        return $this->render('referendum/index.html.twig', [
-            'referendums' => $referendumRepository->findAll(),
-        ]);
-    }
-
     /**
      * @Route("/new", name="referendum_new", methods={"GET","POST"})
      */
@@ -33,38 +26,6 @@ class ReferendumController extends AbstractController
     {
         $referendumRepository->addReferendum($request);
         var_dump($myDate = date('m/d/Y')); exit;
-    }
-
-    /**
-     * @Route("/{id}", name="referendum_show", methods={"GET"})
-     */
-    public function show(Referendum $referendum): Response
-    {
-        return $this->render('referendum/show.html.twig', [
-            'referendum' => $referendum,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="referendum_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Referendum $referendum): Response
-    {
-        $form = $this->createForm(ReferendumType::class, $referendum);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('referendum_index', [
-                'id' => $referendum->getId(),
-            ]);
-        }
-
-        return $this->render('referendum/edit.html.twig', [
-            'referendum' => $referendum,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -89,8 +50,7 @@ class ReferendumController extends AbstractController
         $userId = $roles = $this->getUser()->getId();
         $referendumId = $request->request->get('id');
 
-        #return $this->redirectToRoute('referendum_index');
-        var_dump($referendumId); exit;
+        return $this->redirectToRoute('student');
     }
 
     /**
@@ -103,6 +63,6 @@ class ReferendumController extends AbstractController
 
         $referendumUserRepository->voteFor($userId, $referendumId);
 
-        var_dump($referendumId); exit;
+        return $this->redirectToRoute('student');
     }
 }

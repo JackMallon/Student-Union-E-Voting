@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Referendum;
 use App\Form\ReferendumType;
 use App\Repository\ReferendumRepository;
+use App\Repository\ReferendumUserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,5 +79,30 @@ class ReferendumController extends AbstractController
         }
 
         return $this->redirectToRoute('referendum_index');
+    }
+
+    /**
+     * @Route("/student/vote-for", name="vote_for", methods={"POST"})
+     */
+    public function voteFor(Request $request, ReferendumUserRepository $referendumUserRepository): Response
+    {
+        $userId = $roles = $this->getUser()->getId();
+        $referendumId = $request->request->get('id');
+
+        #return $this->redirectToRoute('referendum_index');
+        var_dump($referendumId); exit;
+    }
+
+    /**
+     * @Route("/student/vote-against", name="vote_against", methods={"POST"})
+     */
+    public function voteAgainst(Request $request, ReferendumUserRepository $referendumUserRepository): Response
+    {
+        $userId = $roles = $this->getUser()->getId();
+        $referendumId = $request->request->get('id');
+
+        $referendumUserRepository->voteFor($userId, $referendumId);
+
+        var_dump($referendumId); exit;
     }
 }

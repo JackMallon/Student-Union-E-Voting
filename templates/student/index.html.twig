@@ -57,14 +57,14 @@
                                     {{ referendum.details }}
                                 </p>
 
-                                <form method="post" action="#" onsubmit="return ;">
-                                    <input type="hidden" name="_method" value="POST">
-                                    <input type="hidden" name="proposal_id">
+                                <form method="post" action="{{ path('vote_referendum') }}">
+                                    <input type="hidden" name="proposal_id" value="{{ referendum.id }}">
                                     <input type="hidden" name="url" value="{{ url }}">
                                     <button type="submit" class="mb-xs mt-xs mr-xs btn btn-primary">
-                                        Vote on this
+                                        Support this
                                     </button>
                                 </form>
+
 
                                 {% if counter < todayArrayLength %}
                                     <hr>

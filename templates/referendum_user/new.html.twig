@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReferendumUser{% endblock %}
+
+{% block body %}
+    <h1>Create new ReferendumUser</h1>
+
+    {{ include('referendum_user/_form.html.twig') }}
+
+    <a href="{{ path('referendum_user_index') }}">back to list</a>
+{% endblock %}

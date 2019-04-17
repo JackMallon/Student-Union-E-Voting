@@ -1,0 +1,78 @@
+{% extends 'student/base.html.twig' %}
+
+{% block nav %}
+    <ul class="nav nav-main">
+        <li>
+            <a href="{{ url('student') }}">
+                <span>Dashboard</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-main">
+        <li>
+            <a href="{{ url('propose_referendum') }}">
+                <span>Propose Referendum</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-main">
+        <li>
+            <a href="{{ url('view_all_proposals_student') }}">
+                <span>All Proposed Referendums</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-main">
+        <li>
+            <a href="{{ url('view_all_upcoming_student') }}">
+                <span>All Upcoming Referendums</span>
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <section role="main" class="content-body">
+        <header class="page-header">
+            <h2>Vote on referendum</h2>
+        </header>
+
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="fa fa-caret-down"></a>
+                        </div>
+
+                        <h2 class="panel-title">Vote on referendum</h2>
+                        <p class="panel-subtitle">Vote on todays referendum</p>
+                    </header>
+                    <div class="panel-body">
+                        <h4>{{ referendum.title }}</h4>
+                        <p>
+                            {{ referendum.details }}
+                        </p>
+
+                        <form style="float: left" method="post" action="{{ path('vote_for') }}">
+                            <input type="hidden" name="id" value="{{ referendum.id }}">
+                            <button type="submit" class="mb-xs mt-xs mr-xs btn btn-primary">
+                                Vote for
+                            </button>
+                        </form>
+                        <form style="float: left" method="post" action="{{ path('vote_against') }}">
+                            <input type="hidden" name="id" value="{{ referendum.id }}">
+                            <button type="submit" class="mb-xs mt-xs mr-xs btn btn-primary">
+                                Vote against
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- end: page -->
+    </section>
+    </div>
+    </section>
+{% endblock %}

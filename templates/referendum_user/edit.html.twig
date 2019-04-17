@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ReferendumUser{% endblock %}
+
+{% block body %}
+    <h1>Edit ReferendumUser</h1>
+
+    {{ include('referendum_user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('referendum_user_index') }}">back to list</a>
+
+    {{ include('referendum_user/_delete_form.html.twig') }}
+{% endblock %}

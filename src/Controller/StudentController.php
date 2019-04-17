@@ -142,4 +142,25 @@ class StudentController extends AbstractController
         return $this->render($template, $args);
         #var_dump($referendums); exit;
     }
+
+    /**
+     * @Route("/student/vote", name="vote_referendum")
+     * @IsGranted("ROLE_STUDENT")
+     */
+    public function voteReferendum(ReferendumRepository $referendumRepository, Request $request)
+    {
+        $username = $roles = $this->getUser()->getUsername();
+        $template = 'student/vote.html.twig';
+        $referendumId = $request->request->get('id');
+
+        $referendum = $referendumRepository->find($referendumId);
+
+        $args = [
+            'username' => $username,
+            'referendum' => $referendum
+        ];
+
+        return $this->render($template, $args);
+        #var_dump($referendum); exit;
+    }
 }

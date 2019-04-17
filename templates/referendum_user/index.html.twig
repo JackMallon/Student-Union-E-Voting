@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReferendumUser index{% endblock %}
+
+{% block body %}
+    <h1>ReferendumUser index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Referendum</th>
+                <th>User</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for referendum_user in referendum_users %}
+            <tr>
+                <td>{{ referendum_user.id }}</td>
+                <td>{{ referendum_user.Referendum }}</td>
+                <td>{{ referendum_user.User }}</td>
+                <td>
+                    <a href="{{ path('referendum_user_show', {'id': referendum_user.id}) }}">show</a>
+                    <a href="{{ path('referendum_user_edit', {'id': referendum_user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('referendum_user_new') }}">Create new</a>
+{% endblock %}
